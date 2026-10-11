@@ -1,0 +1,484 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>V&S MLBB Esports Jersey Store</title>
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <style>
+    .jersey-preview {
+      background: linear-gradient(135deg, #0f172a 0%, #1e1b4b 50%, #312e81 100%);
+    }
+  </style>
+</head>
+<body class="bg-slate-950 text-slate-100 font-sans min-h-screen flex flex-col justify-between">
+
+  <!-- HEADER / NAVBAR -->
+  <header class="sticky top-0 z-50 bg-slate-900/90 backdrop-blur-md border-b border-amber-500/20 px-4 py-3">
+    <div class="max-w-6xl mx-auto flex justify-between items-center">
+      <div class="flex items-center space-x-2">
+        <div class="w-10 h-10 rounded-lg bg-amber-500 flex items-center justify-center font-bold text-slate-950 text-xl border border-amber-300">
+          V&S
+        </div>
+        <div>
+          <h1 class="text-lg font-black tracking-wide text-amber-400">V&S MLBB STORE</h1>
+          <p class="text-xs text-slate-400">Official MLBB Esports & Custom Jersey</p>
+        </div>
+      </div>
+
+      <nav class="hidden md:flex space-x-6 text-sm font-medium">
+        <a href="#katalog" class="hover:text-amber-400 transition">Katalog Jersey</a>
+        <a href="#custom" class="hover:text-amber-400 transition">Custom MLBB</a>
+        <a href="#lacak" class="hover:text-amber-400 transition">Lacak Pesanan</a>
+      </nav>
+
+      <div class="flex items-center space-x-3">
+        <button onclick="toggleCart()" class="relative p-2 bg-slate-800 rounded-lg hover:bg-slate-700">
+          <i data-lucide="shopping-cart" class="w-5 h-5 text-amber-400"></i>
+          <span id="cart-count" class="absolute -top-1 -right-1 bg-red-600 text-white text-xs w-5 h-5 rounded-full flex items-center justify-center font-bold">0</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- HERO BANNER -->
+  <section class="relative bg-gradient-to-r from-slate-900 via-indigo-950 to-slate-900 py-12 px-4 border-b border-slate-800 text-center">
+    <div class="max-w-4xl mx-auto">
+      <span class="bg-amber-500/10 text-amber-400 text-xs px-3 py-1 rounded-full border border-amber-500/30 font-semibold uppercase tracking-wider">
+        Mobile Legends Special Edition
+      </span>
+      <h2 class="text-3xl md:text-5xl font-black mt-4 text-white uppercase tracking-wide">
+        Jersey Pro Player <span class="text-amber-400">& Custom MLBB Squad</span>
+      </h2>
+      <p class="text-slate-300 mt-2 max-w-2xl mx-auto text-sm md:text-base">
+        Cetak jersey tim Mobile Legends kamu dengan bahan Dri-Fit Premium, cetak sublimasi full color, gratis sablon Nickname & Nomor Punggung, serta fitur COD (Bayar di Tempat)!
+      </p>
+      <div class="mt-6 flex justify-center gap-4">
+        <a href="#custom" class="bg-amber-500 hover:bg-amber-400 text-slate-950 font-bold px-6 py-3 rounded-lg shadow-lg shadow-amber-500/20 transition flex items-center gap-2">
+          <i data-lucide="pen-tool" class="w-4 h-4"></i> Buat Custom Jersey
+        </a>
+        <a href="#katalog" class="bg-slate-800 hover:bg-slate-700 text-white font-bold px-6 py-3 rounded-lg border border-slate-700 transition">
+          Lihat Katalog Tim
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- KATALOG PRODUCT SECTION -->
+  <section id="katalog" class="max-w-6xl mx-auto py-12 px-4 w-full">
+    <div class="mb-8">
+      <h3 class="text-2xl font-bold text-white">Katalog Jersey MLBB Official</h3>
+      <p class="text-slate-400 text-sm">Pilih jersey dari tim esport Mobile Legends favoritmu</p>
+    </div>
+
+    <!-- PRODUCT GRID -->
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6" id="product-list">
+      <!-- Diisi JS secara otomatis -->
+    </div>
+  </section>
+
+  <!-- CUSTOM JERSEY BUILDER SECTION -->
+  <section id="custom" class="bg-slate-900 py-12 px-4 border-t border-b border-slate-800 w-full">
+    <div class="max-w-6xl mx-auto">
+      <div class="text-center mb-8">
+        <h3 class="text-2xl md:text-3xl font-black text-amber-400 uppercase">Studio Custom Jersey MLBB</h3>
+        <p class="text-slate-400 text-sm">Desain jersey squad Mobile Legends milikmu sendiri</p>
+      </div>
+
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 items-start">
+        <!-- PREVIEW JERSEY -->
+        <div class="bg-slate-950 p-6 rounded-2xl border border-slate-800 text-center sticky top-20">
+          <h4 class="text-sm font-semibold text-slate-400 mb-4">PRATINJAU DESAIN JERSEY</h4>
+          <div class="jersey-preview w-full h-80 rounded-xl border border-indigo-500/30 flex flex-col items-center justify-center relative p-6 shadow-2xl">
+            <!-- Kerah -->
+            <div class="w-20 h-6 border-b-2 border-amber-400 rounded-b-full absolute top-0 bg-slate-900"></div>
+            <!-- Logo Squad -->
+            <div id="prev-squad" class="text-2xl font-black text-amber-400 tracking-wider uppercase mt-4">
+              RRQ ACADEMY
+            </div>
+            <!-- Role Emblem -->
+            <div id="prev-role" class="mt-2 bg-indigo-900/80 text-indigo-200 border border-indigo-400 text-xs px-3 py-1 rounded-full font-bold">
+              ROLE: JUNGLER
+            </div>
+            <!-- Nickname & Number -->
+            <div class="mt-8 text-center">
+              <div id="prev-nickname" class="text-xl font-bold text-white tracking-widest uppercase">
+                LEMON
+              </div>
+              <div id="prev-number" class="text-5xl font-black text-amber-400">
+                08
+              </div>
+            </div>
+            <!-- Footer Preview -->
+            <div class="absolute bottom-3 text-[10px] text-slate-400">
+              V&S Official MLBB Custom Sublimation
+            </div>
+          </div>
+          <p class="text-xs text-slate-500 mt-3">* Tampilan di atas adalah simulasi posisi sablon dan nama squad.</p>
+        </div>
+
+        <!-- FORM CUSTOM -->
+        <div class="bg-slate-950 p-6 rounded-2xl border border-slate-800 space-y-4">
+          <h4 class="font-bold text-lg text-white border-b border-slate-800 pb-2">Detail Custom MLBB</h4>
+
+          <div>
+            <label class="block text-xs font-semibold text-slate-300 mb-1">Nama Squad / Tim MLBB</label>
+            <input type="text" id="cust-squad" value="RRQ ACADEMY" oninput="updatePreview()" class="w-full bg-slate-900 border border-slate-700 rounded-lg p-2.5 text-sm focus:border-amber-400 outline-none text-white" placeholder="Contoh: ONIC SQUAD" />
+          </div>
+
+          <div class="grid grid-cols-2 gap-4">
+            <div>
+              <label class="block text-xs font-semibold text-slate-300 mb-1">Nickname Punggung</label>
+              <input type="text" id="cust-nickname" value="LEMON" oninput="updatePreview()" class="w-full bg-slate-900 border border-slate-700 rounded-lg p-2.5 text-sm focus:border-amber-400 outline-none text-white" placeholder="Contoh: ALBERT" />
+            </div>
+            <div>
+              <label class="block text-xs font-semibold text-slate-300 mb-1">Nomor Punggung</label>
+              <input type="number" id="cust-number" value="08" oninput="updatePreview()" class="w-full bg-slate-900 border border-slate-700 rounded-lg p-2.5 text-sm focus:border-amber-400 outline-none text-white" placeholder="Contoh: 07" />
+            </div>
+          </div>
+
+          <div class="grid grid-cols-2 gap-4">
+            <div>
+              <label class="block text-xs font-semibold text-slate-300 mb-1">Role Utama MLBB</label>
+              <select id="cust-role" onchange="updatePreview()" class="w-full bg-slate-900 border border-slate-700 rounded-lg p-2.5 text-sm focus:border-amber-400 outline-none text-white">
+                <option value="Jungler">Jungler</option>
+                <option value="Gold Lane">Gold Lane</option>
+                <option value="EXP Lane">EXP Lane</option>
+                <option value="Roamer">Roamer</option>
+                <option value="Mid Lane">Mid Lane</option>
+              </select>
+            </div>
+            <div>
+              <label class="block text-xs font-semibold text-slate-300 mb-1">ID & Server MLBB</label>
+              <input type="text" id="cust-mlid" class="w-full bg-slate-900 border border-slate-700 rounded-lg p-2.5 text-sm focus:border-amber-400 outline-none text-white" placeholder="12345678 (2026)" />
+            </div>
+          </div>
+
+          <div class="grid grid-cols-2 gap-4">
+            <div>
+              <label class="block text-xs font-semibold text-slate-300 mb-1">Bahan Kain</label>
+              <select id="cust-fabric" class="w-full bg-slate-900 border border-slate-700 rounded-lg p-2.5 text-sm focus:border-amber-400 outline-none text-white">
+                <option value="Dri-Fit Milano Premium">Dri-Fit Milano Premium</option>
+                <option value="Dri-Fit Nike Brazil">Dri-Fit Nike Brazil</option>
+                <option value="Serena High Grade">Serena High Grade</option>
+              </select>
+            </div>
+            <div>
+              <label class="block text-xs font-semibold text-slate-300 mb-1">Ukuran Jersey</label>
+              <select id="cust-size" class="w-full bg-slate-900 border border-slate-700 rounded-lg p-2.5 text-sm focus:border-amber-400 outline-none text-white">
+                <option value="S">S (Lebar 48cm)</option>
+                <option value="M">M (Lebar 50cm)</option>
+                <option value="L" selected>L (Lebar 52cm)</option>
+                <option value="XL">XL (Lebar 54cm)</option>
+                <option value="XXL">XXL (Lebar 58cm)</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="pt-2 border-t border-slate-800 flex justify-between items-center">
+            <div>
+              <span class="text-xs text-slate-400 block">Harga Custom:</span>
+              <span class="text-xl font-bold text-amber-400">Rp 235.000</span>
+            </div>
+            <button onclick="addCustomToCart()" class="bg-amber-500 hover:bg-amber-400 text-slate-950 font-bold px-6 py-2.5 rounded-lg flex items-center gap-2">
+              <i data-lucide="plus-circle" class="w-4 h-4"></i> Tambahkan Custom
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- LACAK PESANAN SECTION -->
+  <section id="lacak" class="max-w-4xl mx-auto py-12 px-4 w-full">
+    <div class="bg-slate-900 p-6 rounded-2xl border border-slate-800 text-center">
+      <h3 class="text-xl font-bold text-white mb-2">Pelacakan Pesanan MLBB</h3>
+      <p class="text-xs text-slate-400 mb-6">Masukkan Nomor Order unik Anda untuk melihat status produksi & pengiriman</p>
+      
+      <div class="flex max-w-md mx-auto gap-2">
+        <input type="text" id="track-input" placeholder="Contoh: MLBB-20261010-891" class="flex-1 bg-slate-950 border border-slate-700 rounded-lg px-4 py-2.5 text-sm outline-none text-white focus:border-amber-400" />
+        <button onclick="trackOrder()" class="bg-amber-500 hover:bg-amber-400 text-slate-950 font-bold px-5 py-2.5 rounded-lg text-sm">
+          Cek Resi
+        </button>
+      </div>
+
+      <div id="track-result" class="mt-6 hidden bg-slate-950 p-4 rounded-xl border border-slate-800 text-left">
+        <!-- Result diisi JS -->
+      </div>
+    </div>
+  </section>
+
+  <!-- CART & CHECKOUT MODAL DRAWER -->
+  <div id="cart-drawer" class="fixed inset-0 z-50 bg-black/70 backdrop-blur-sm hidden transition-opacity">
+    <div class="absolute right-0 top-0 h-full w-full max-w-md bg-slate-900 border-l border-slate-800 p-6 overflow-y-auto flex flex-col justify-between">
+      <div>
+        <div class="flex justify-between items-center pb-4 border-b border-slate-800">
+          <h3 class="text-lg font-bold text-white flex items-center gap-2">
+            <i data-lucide="shopping-bag" class="text-amber-400 w-5 h-5"></i> Keranjang Pesanan
+          </h3>
+          <button onclick="toggleCart()" class="text-slate-400 hover:text-white">
+            <i data-lucide="x" class="w-6 h-6"></i>
+          </button>
+        </div>
+
+        <!-- LIST CART ITEMS -->
+        <div id="cart-items" class="py-4 space-y-3">
+          <!-- Item diisi JS -->
+        </div>
+      </div>
+
+      <!-- FORM CHECKOUT & BAYAR -->
+      <div class="border-t border-slate-800 pt-4 space-y-3">
+        <div class="flex justify-between font-bold text-white text-base">
+          <span>Total Pembayaran:</span>
+          <span id="cart-total" class="text-amber-400">Rp 0</span>
+        </div>
+
+        <div class="space-y-2">
+          <label class="block text-xs font-semibold text-slate-300">Data Pemesan:</label>
+          <input type="text" id="buyer-name" placeholder="Nama Lengkap" class="w-full bg-slate-950 border border-slate-700 rounded p-2 text-xs text-white outline-none" />
+          <textarea id="buyer-address" placeholder="Alamat Pengiriman Lengkap (Kecamatan, Kota/Kab, Prov)" class="w-full bg-slate-950 border border-slate-700 rounded p-2 text-xs text-white outline-none h-16"></textarea>
+          
+          <label class="block text-xs font-semibold text-slate-300 pt-1">Metode Pembayaran:</label>
+          <select id="payment-method" class="w-full bg-slate-950 border border-slate-700 rounded p-2 text-xs text-white outline-none">
+            <option value="COD (Bayar di Tempat)">COD (Bayar di Tempat)</option>
+            <option value="QRIS (OVO/DANA/GoPay)">QRIS (All E-Wallet)</option>
+            <option value="Transfer Bank BCA">Transfer Bank BCA (883012930)</option>
+            <option value="Transfer Bank Mandiri">Transfer Bank Mandiri</option>
+          </select>
+        </div>
+
+        <button onclick="checkoutToWhatsApp()" class="w-full bg-green-600 hover:bg-green-500 text-white font-bold py-3 rounded-lg flex items-center justify-center gap-2 shadow-lg shadow-green-600/20">
+          <i data-lucide="message-square" class="w-5 h-5"></i> Kirim Order via WhatsApp
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <footer class="bg-slate-900 border-t border-slate-800 py-6 text-center text-xs text-slate-500">
+    <p>&copy; 2026 V&S MLBB Esports Jersey Store. All rights reserved.</p>
+  </footer>
+
+  <!-- SCRIPT JAVASCRIPT -->
+  <script>
+    // DATA KATALOG JERSEY MLBB DENGAN GAMBAR USER
+    const products = [
+      {
+        id: 'rrq-2024-black',
+        name: 'Jersey RRQ Esport 2024 Black Edition',
+        price: 240000,
+        role: 'MPL Pro Edition',
+        badge: 'Gratis Nickname & Bisa COD',
+        image: 'https://i.ibb.co/6P0fM5n/rrq-2024-black.jpg' // Memakai gambar RRQ 2024
+      },
+      {
+        id: 'aurora-gaming-cyan',
+        name: 'Jersey Aurora Gaming White Cyan Edition',
+        price: 235000,
+        role: 'Pro League Edition',
+        badge: 'Custom Name 99 XANTARES',
+        image: 'https://i.ibb.co/3k8ZvZg/aurora-gaming-cyan.jpg' // Memakai gambar Aurora Gaming
+      },
+      {
+        id: 'evos-dragon-white',
+        name: 'Jersey EVOS Legends White Blue Dragon',
+        price: 230000,
+        role: 'M-Series Edition',
+        badge: 'Full Sublimation Dryfit',
+        image: 'https://i.ibb.co/2Syt7vR/evos-white-dragon.jpg' // Memakai gambar EVOS Dragon
+      }
+    ];
+
+    let cart = [];
+
+    // RENDER KATALOG KE DOM
+    function renderProducts() {
+      const container = document.getElementById('product-list');
+      container.innerHTML = products.map(p => `
+        <div class="bg-slate-900 border border-slate-800 rounded-xl overflow-hidden hover:border-amber-500/50 transition flex flex-col justify-between">
+          <div>
+            <img src="${p.image}" alt="${p.name}" class="w-full h-64 object-contain bg-slate-950 p-2" />
+            <div class="p-4">
+              <div class="flex justify-between items-center mb-1">
+                <span class="text-[10px] bg-amber-500/10 text-amber-400 px-2 py-0.5 rounded border border-amber-500/20 font-bold uppercase">${p.role}</span>
+                <span class="text-[10px] bg-green-500/10 text-green-400 px-2 py-0.5 rounded border border-green-500/20 font-bold">${p.badge}</span>
+              </div>
+              <h4 class="font-bold text-white text-base mt-2">${p.name}</h4>
+            </div>
+          </div>
+          <div class="p-4 pt-0 flex justify-between items-center border-t border-slate-800/50 mt-2">
+            <span class="text-amber-400 font-extrabold text-lg">Rp ${p.price.toLocaleString('id-ID')}</span>
+            <button onclick="addToCart('${p.id}')" class="bg-amber-500 hover:bg-amber-400 text-slate-950 font-bold px-3 py-1.5 rounded-md text-xs flex items-center gap-1">
+              <i data-lucide="plus" class="w-4 h-4"></i> Beli Sekarang
+            </button>
+          </div>
+        </div>
+      `).join('');
+      lucide.createIcons();
+    }
+
+    // UPDATE PREVIEW CUSTOM
+    function updatePreview() {
+      document.getElementById('prev-squad').innerText = document.getElementById('cust-squad').value || 'SQUAD NAME';
+      document.getElementById('prev-nickname').innerText = document.getElementById('cust-nickname').value || 'NICKNAME';
+      document.getElementById('prev-number').innerText = document.getElementById('cust-number').value || '00';
+      document.getElementById('prev-role').innerText = 'ROLE: ' + document.getElementById('cust-role').value;
+    }
+
+    // TAMBAH KATALOG KE CART
+    function addToCart(productId) {
+      const item = products.find(p => p.id === productId);
+      cart.push({
+        title: item.name,
+        price: item.price,
+        details: 'Ukuran: L | Gratis Custom Nickname'
+      });
+      updateCartUI();
+      toggleCart();
+    }
+
+    // TAMBAH CUSTOM KE CART
+    function addCustomToCart() {
+      const squad = document.getElementById('cust-squad').value;
+      const nick = document.getElementById('cust-nickname').value;
+      const num = document.getElementById('cust-number').value;
+      const role = document.getElementById('cust-role').value;
+      const size = document.getElementById('cust-size').value;
+      const mlid = document.getElementById('cust-mlid').value;
+
+      cart.push({
+        title: `Custom Jersey - Squad ${squad}`,
+        price: 235000,
+        details: `Nick: ${nick} (#${num}) | Role: ${role} | Size: ${size} | ID ML: ${mlid || '-'}`
+      });
+
+      updateCartUI();
+      toggleCart();
+    }
+
+    // UPDATE TAMPILAN CART
+    function updateCartUI() {
+      document.getElementById('cart-count').innerText = cart.length;
+      const container = document.getElementById('cart-items');
+      
+      if (cart.length === 0) {
+        container.innerHTML = '<p class="text-slate-500 text-xs text-center py-6">Keranjang masih kosong.</p>';
+        document.getElementById('cart-total').innerText = 'Rp 0';
+        return;
+      }
+
+      let total = 0;
+      container.innerHTML = cart.map((item, index) => {
+        total += item.price;
+        return `
+          <div class="bg-slate-950 p-3 rounded-lg border border-slate-800 flex justify-between items-start">
+            <div>
+              <h5 class="text-xs font-bold text-white">${item.title}</h5>
+              <p class="text-[10px] text-slate-400 mt-1">${item.details}</p>
+              <span class="text-xs font-bold text-amber-400 mt-1 block">Rp ${item.price.toLocaleString('id-ID')}</span>
+            </div>
+            <button onclick="removeFromCart(${index})" class="text-slate-500 hover:text-red-400">
+              <i data-lucide="trash-2" class="w-4 h-4"></i>
+            </button>
+          </div>
+        `;
+      }).join('');
+
+      document.getElementById('cart-total').innerText = 'Rp ' + total.toLocaleString('id-ID');
+      lucide.createIcons();
+    }
+
+    function removeFromCart(index) {
+      cart.splice(index, 1);
+      updateCartUI();
+    }
+
+    function toggleCart() {
+      const drawer = document.getElementById('cart-drawer');
+      drawer.classList.toggle('hidden');
+    }
+
+    // CHECKOUT VIA WHATSAPP (082122905448)
+    function checkoutToWhatsApp() {
+      if (cart.length === 0) {
+        alert('Keranjang Anda masih kosong!');
+        return;
+      }
+
+      const name = document.getElementById('buyer-name').value;
+      const address = document.getElementById('buyer-address').value;
+      const payment = document.getElementById('payment-method').value;
+
+      if (!name || !address) {
+        alert('Mohon lengkapi Nama Pemesan dan Alamat Pengiriman!');
+        return;
+      }
+
+      // Hasilkan Nomor Order Unik
+      const orderId = 'MLBB-' + new Date().toISOString().slice(0,10).replace(/-/g,'') + '-' + Math.floor(100 + Math.random() * 900);
+
+      let total = 0;
+      let textOrder = `*ORDER BARU V&S MLBB JERSEY*\n`;
+      textOrder += `-----------------------------------\n`;
+      textOrder += `*No. Order*: ${orderId}\n`;
+      textOrder += `*Nama*: ${name}\n`;
+      textOrder += `*Alamat*: ${address}\n`;
+      textOrder += `*Metode Bayar*: ${payment}\n`;
+      textOrder += `-----------------------------------\n`;
+      textOrder += `*Rincian Pesanan*:\n`;
+
+      cart.forEach((item, i) => {
+        total += item.price;
+        textOrder += `${i+1}. ${item.title}\n   (${item.details}) - Rp ${item.price.toLocaleString('id-ID')}\n`;
+      });
+
+      textOrder += `-----------------------------------\n`;
+      textOrder += `*TOTAL BAYAR*: Rp ${total.toLocaleString('id-ID')}\n\n`;
+      textOrder += `Mohon segera diproses pesanan saya. Terima kasih!`;
+
+      // Redirect ke WhatsApp Admin (082122905448)
+      const adminWA = '6282122905448';
+      const encodedUrl = `https://wa.me/${adminWA}?text=${encodeURIComponent(textOrder)}`;
+      
+      alert(`Pesanan Berhasil dibuat!\nNomor Order Anda: ${orderId}\n\nSistem akan mengarahkan ke WhatsApp Admin.`);
+      window.open(encodedUrl, '_blank');
+    }
+
+    // SIMULASI CEK RESI
+    function trackOrder() {
+      const input = document.getElementById('track-input').value.trim();
+      const res = document.getElementById('track-result');
+      if (!input) {
+        alert('Masukkan Nomor Order!');
+        return;
+      }
+
+      res.classList.remove('hidden');
+      res.innerHTML = `
+        <div class="space-y-2">
+          <div class="flex justify-between items-center text-xs text-slate-400 border-b border-slate-800 pb-2">
+            <span>No. Order: <strong class="text-amber-400">${input}</strong></span>
+            <span class="bg-green-500/10 text-green-400 px-2 py-0.5 rounded border border-green-500/20 font-bold">PROSES PRODUKSI</span>
+          </div>
+          <p class="text-xs text-white font-medium">Status: Jersey sedang dalam proses Cetak Sublimasi & Sablon Nickname.</p>
+          <div class="w-full bg-slate-900 rounded-full h-2 overflow-hidden mt-2">
+            <div class="bg-amber-500 h-full w-2/4"></div>
+          </div>
+          <p class="text-[10px] text-slate-500">Estimasi Selesai: 2-3 Hari Kerja.</p>
+        </div>
+      `;
+    }
+
+    // INITIAL LOAD
+    window.onload = function() {
+      renderProducts();
+      updatePreview();
+      lucide.createIcons();
+    };
+  </script>
+</body>
+</html>
