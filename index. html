@@ -1,0 +1,777 @@
+<!DOCTYPE html>
+<html lang="id" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vallz Store – Modern Cyber Gaming Store</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts: Inter & Cinzel -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Cinzel:wght@600;700;800&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        accentBlue: {
+                            100: '#E0F2FE',
+                            300: '#7DD3FC',
+                            500: '#0EA5E9',
+                            600: '#0284C7',
+                            700: '#0369A1',
+                        },
+                        darkBg: '#07090e',
+                        cardBg: '#111827',
+                        cardHover: '#1f293d'
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        serif: ['Cinzel', 'serif']
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            background-color: #07090e;
+            color: #f3f4f6;
+            font-family: 'Inter', sans-serif;
+            background-image: radial-gradient(circle at 50% 15%, rgba(14, 165, 233, 0.12) 0%, transparent 60%),
+                              radial-gradient(circle at 15% 85%, rgba(2, 132, 199, 0.08) 0%, transparent 50%),
+                              radial-gradient(circle at 85% 90%, rgba(14, 165, 233, 0.06) 0%, transparent 40%);
+            background-attachment: fixed;
+        }
+        .blue-gradient-text {
+            background: linear-gradient(135deg, #E0F2FE 0%, #38BDF8 50%, #0284C7 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .blue-gradient-bg {
+            background: linear-gradient(135deg, #38BDF8 0%, #0EA5E9 50%, #0284C7 100%);
+        }
+        .blue-border {
+            border: 1px solid rgba(14, 165, 233, 0.3);
+        }
+        .blue-border-glow:hover {
+            border-color: #0EA5E9;
+            box-shadow: 0 0 20px rgba(14, 165, 233, 0.25);
+        }
+        .luxury-card {
+            background: linear-gradient(145deg, #111827 0%, #0b0f19 100%);
+            border: 1px solid rgba(14, 165, 233, 0.25);
+            border-radius: 1rem;
+            box-shadow: 0 10px 30px -10px rgba(0,0,0,0.7), inset 0 1px 0 rgba(14, 165, 233, 0.1);
+        }
+        /* Custom scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #07090e;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #0EA5E9;
+            border-radius: 4px;
+        }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col selection:bg-accentBlue-500 selection:text-black">
+
+    <!-- Navigation Header -->
+    <header class="sticky top-0 z-50 bg-[#07090e]/90 backdrop-blur-md border-b border-accentBlue-500/30 shadow-lg shadow-black/40">
+        <div class="max-w-4xl mx-auto px-4 py-3 flex items-center justify-between">
+            <a href="#" onclick="switchTab('home')" class="flex items-center gap-2 group">
+                <div class="w-10 h-10 rounded-full blue-gradient-bg flex items-center justify-center shadow-lg shadow-accentBlue-500/30 group-hover:scale-105 transition">
+                    <i class="fa-solid fa-gamepad text-black text-lg"></i>
+                </div>
+                <div class="flex flex-col">
+                    <span class="font-serif font-bold text-lg blue-gradient-text tracking-wide">Vallz Store</span>
+                    <span class="text-[10px] text-accentBlue-300/70 tracking-widest uppercase">Cyber Gaming</span>
+                </div>
+            </a>
+
+            <!-- Desktop / Tablet Nav Links -->
+            <nav class="hidden md:flex items-center gap-6 text-sm font-medium">
+                <button onclick="switchTab('home')" class="nav-btn text-accentBlue-500 hover:text-accentBlue-300 transition py-1 border-b-2 border-accentBlue-500" data-target="home">Home</button>
+                <button onclick="switchTab('topup')" class="nav-btn text-gray-300 hover:text-accentBlue-300 transition py-1 border-b-2 border-transparent" data-target="topup">Top Up Game</button>
+                <button onclick="switchTab('joki')" class="nav-btn text-gray-300 hover:text-accentBlue-300 transition py-1 border-b-2 border-transparent" data-target="joki">Jasa Joki</button>
+                <a href="https://wa.me/6282122905448" target="_blank" class="px-4 py-1.5 rounded-full blue-gradient-bg text-black font-semibold text-xs hover:opacity-95 transition shadow-md shadow-accentBlue-500/20">
+                    <i class="fa-brands fa-whatsapp mr-1"></i> Kontak Admin
+                </a>
+            </nav>
+
+            <!-- Mobile Hamburger Menu Button -->
+            <button id="menu-toggle" onclick="toggleMobileMenu()" class="md:hidden text-accentBlue-500 p-2 text-xl focus:outline-none">
+                <i class="fa-solid fa-bars"></i>
+            </button>
+        </div>
+
+        <!-- Mobile Menu Dropdown -->
+        <div id="mobile-menu" class="hidden md:hidden bg-[#111827] border-b border-accentBlue-500/30 px-4 py-4 space-y-3 shadow-xl">
+            <button onclick="switchTab('home'); toggleMobileMenu();" class="block w-full text-left py-2 px-3 rounded-lg hover:bg-accentBlue-500/10 text-accentBlue-500 font-medium">Home</button>
+            <button onclick="switchTab('topup'); toggleMobileMenu();" class="block w-full text-left py-2 px-3 rounded-lg hover:bg-accentBlue-500/10 text-gray-200 font-medium">Top Up Game</button>
+            <button onclick="switchTab('joki'); toggleMobileMenu();" class="block w-full text-left py-2 px-3 rounded-lg hover:bg-accentBlue-500/10 text-gray-200 font-medium">Jasa Joki</button>
+            <a href="https://wa.me/6282122905448" target="_blank" class="block text-center py-2.5 rounded-xl blue-gradient-bg text-black font-bold text-sm shadow-md">
+                <i class="fa-brands fa-whatsapp mr-1"></i> Hubungi Admin WhatsApp
+            </a>
+        </div>
+    </header>
+
+    <!-- Main Container -->
+    <main class="flex-grow max-w-4xl w-full mx-auto px-4 py-6">
+
+        <!-- SECTION: HOME -->
+        <section id="section-home" class="space-y-6">
+            <!-- Brand Logo & Header Showcase -->
+            <div class="luxury-card p-6 text-center relative overflow-hidden shadow-2xl">
+                <div class="absolute -top-10 -right-10 w-40 h-40 bg-accentBlue-500/20 rounded-full blur-3xl pointer-events-none"></div>
+                <div class="absolute -bottom-10 -left-10 w-40 h-40 bg-accentBlue-500/15 rounded-full blur-3xl pointer-events-none"></div>
+                
+                <div class="inline-block p-4 rounded-2xl bg-gradient-to-b from-[#1f293d] to-[#07090e] blue-border mb-4 shadow-2xl">
+                    <div class="text-5xl font-serif font-bold blue-gradient-text tracking-tighter mb-1">V<span class="text-accentBlue-300">S</span></div>
+                    <div class="text-xl font-serif font-semibold text-white tracking-widest uppercase">Vallz Store</div>
+                    <div class="text-[10px] tracking-[0.3em] text-accentBlue-400 mt-1">— MODERN CYBER GAMING —</div>
+                </div>
+                <h1 class="text-2xl md:text-3xl font-bold font-serif blue-gradient-text mb-2">Selamat Datang di Vallz Store</h1>
+                <p class="text-gray-300 text-sm max-w-md mx-auto">Pusat Top Up Diamond Mobile Legends & Jasa Joki Rank Berkelas, Terpercaya, dan Tercepat di Indonesia.</p>
+            </div>
+
+            <!-- Quick Action Buttons -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <button onclick="switchTab('topup')" class="luxury-card p-5 text-left transition blue-border-glow group flex items-center justify-between">
+                    <div>
+                        <div class="text-accentBlue-400 font-bold text-lg mb-1 group-hover:text-accentBlue-300 transition flex items-center gap-2">
+                            <i class="fa-solid fa-gem text-accentBlue-500"></i><span>Tempat Top Up Game</span>
+                        </div>
+                        <p class="text-xs text-gray-300">Pilih nominal diamond MLBB & proses instan.</p>
+                    </div>
+                    <div class="w-10 h-10 rounded-full bg-accentBlue-500/20 flex items-center justify-center text-accentBlue-400 group-hover:translate-x-1 transition border border-accentBlue-500/30">
+                        <i class="fa-solid fa-arrow-right"></i>
+                    </div>
+                </button>
+
+                <button onclick="switchTab('joki')" class="luxury-card p-5 text-left transition blue-border-glow group flex items-center justify-between">
+                    <div>
+                        <div class="text-accentBlue-400 font-bold text-lg mb-1 group-hover:text-accentBlue-300 transition flex items-center gap-2">
+                            <i class="fa-solid fa-shield-halved text-accentBlue-500"></i><span>Jasa Joki</span>
+                        </div>
+                        <p class="text-xs text-gray-300">Joki aman, cepat, dan ditangani pro player.</p>
+                    </div>
+                    <div class="w-10 h-10 rounded-full bg-accentBlue-500/20 flex items-center justify-center text-accentBlue-400 group-hover:translate-x-1 transition border border-accentBlue-500/30">
+                        <i class="fa-solid fa-arrow-right"></i>
+                    </div>
+                </button>
+            </div>
+
+            <!-- Promo Banner -->
+            <div class="relative rounded-2xl overflow-hidden shadow-2xl border border-accentBlue-500/40 bg-gradient-to-r from-[#111827] to-[#162238]">
+                <div class="absolute inset-0 bg-gradient-to-r from-black/85 via-black/60 to-transparent z-10 flex flex-col justify-center p-6 md:p-10">
+                    <span class="inline-block px-3 py-1 rounded-full blue-gradient-bg text-black text-xs font-bold w-max mb-2 shadow-md">LIMITED OFFER</span>
+                    <h2 class="text-2xl md:text-4xl font-extrabold font-serif blue-gradient-text mb-2">DISKON UP TO 50%</h2>
+                    <p class="text-xs md:text-sm text-gray-200 max-w-xs mb-4">Opening Shop & Joki Diamond spesial minggu ini di Vallz Store.</p>
+                    <button onclick="switchTab('topup')" class="px-5 py-2.5 rounded-xl blue-gradient-bg text-black font-bold text-xs md:text-sm w-max hover:opacity-95 transition shadow-lg shadow-accentBlue-500/20">
+                        Top Up Sekarang
+                    </button>
+                </div>
+                <div class="h-56 md:h-64 flex items-center justify-end relative">
+                    <div class="absolute right-6 opacity-30 md:opacity-60 text-right">
+                        <i class="fa-solid fa-bolt text-7xl md:text-9xl text-accentBlue-500/50"></i>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Testimonials & Rating -->
+            <div class="luxury-card p-6">
+                <h3 class="text-lg font-serif font-bold text-accentBlue-400 mb-4 flex items-center gap-2">
+                    <i class="fa-solid fa-star text-accentBlue-500"></i> Rating & Testimoni Pelanggan
+                </h3>
+                <div class="flex flex-col sm:flex-row items-center justify-between gap-4 bg-[#07090e] p-4 rounded-xl border border-accentBlue-500/20 mb-4 shadow-inner">
+                    <div class="text-center sm:text-left">
+                        <div class="text-3xl font-extrabold text-white">4.8 <span class="text-sm font-normal text-accentBlue-300/70">/ 5.0</span></div>
+                        <div class="flex text-accentBlue-500 text-sm mt-1 justify-center sm:justify-start">
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star-half-stroke"></i>
+                        </div>
+                    </div>
+                    <div class="text-xs text-gray-300 text-center sm:text-right">
+                        Berdasarkan ulasan dari 1.250+ pelanggan sukses top up & joki di Vallz Store.
+                    </div>
+                </div>
+
+                <!-- Interactive Like / Dislike feedback buttons (Toggleable) -->
+                <div class="flex items-center justify-between pt-2 border-t border-accentBlue-500/20">
+                    <span class="text-xs text-gray-300">Apakah website ini membantu?</span>
+                    <div class="flex gap-2">
+                        <button onclick="handleFeedback('like')" id="btn-like" class="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-[#111827] hover:bg-accentBlue-500/20 text-xs border border-accentBlue-500/30 text-gray-200 transition">
+                            <i id="icon-like" class="fa-regular fa-thumbs-up text-accentBlue-400"></i> <span id="like-count">142</span>
+                        </button>
+                        <button onclick="handleFeedback('dislike')" id="btn-dislike" class="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-[#111827] hover:bg-red-500/20 text-xs border border-accentBlue-500/30 text-gray-200 transition">
+                            <i id="icon-dislike" class="fa-regular fa-thumbs-down text-red-400"></i> <span id="dislike-count">2</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Quick WhatsApp Button -->
+            <div class="text-center">
+                <a href="https://wa.me/6282122905448" target="_blank" class="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-sky-600 hover:bg-sky-500 text-white font-bold text-sm shadow-lg shadow-sky-900/30 transition">
+                    <i class="fa-brands fa-whatsapp text-lg"></i> Hubungi Admin WhatsApp Utama
+                </a>
+            </div>
+        </section>
+
+        <!-- SECTION: TOP UP GAME -->
+        <section id="section-topup" class="hidden space-y-6">
+            <div class="flex items-center justify-between">
+                <div class="flex items-center gap-3">
+                    <button onclick="switchTab('home')" class="w-9 h-9 rounded-xl bg-[#111827] border border-accentBlue-500/40 flex items-center justify-center text-accentBlue-400 hover:bg-accentBlue-500 hover:text-black transition">
+                        <i class="fa-solid fa-arrow-left"></i>
+                    </button>
+                    <h2 class="text-2xl font-serif font-bold blue-gradient-text">Top Up Games</h2>
+                </div>
+                <span class="text-xs px-3 py-1 rounded-full bg-accentBlue-500/20 text-accentBlue-300 border border-accentBlue-500/40 font-semibold">Mobile Legends</span>
+            </div>
+
+            <!-- Brand Header Banner -->
+            <div class="luxury-card p-4 flex items-center gap-4">
+                <div class="w-14 h-14 rounded-xl blue-gradient-bg flex items-center justify-center text-black font-serif font-bold text-2xl shadow-md shrink-0">
+                    VS
+                </div>
+                <div>
+                    <h3 class="font-bold text-white text-base">Vallz Store - Top Up Diamond Termurah & Tercepat</h3>
+                    <p class="text-xs text-gray-300">Pilih nominal diamond di bawah ini dengan sistem pencet-pencet interaktif.</p>
+                </div>
+            </div>
+
+            <!-- Interactive Diamond Catalog Grid -->
+            <div class="luxury-card p-5">
+                <h3 class="text-sm font-bold text-accentBlue-400 uppercase tracking-wider mb-4 flex items-center justify-between">
+                    <span>List Diamond MLBB (Pilih Nominal)</span>
+                    <span id="selected-diamond-info" class="text-xs text-white font-normal normal-case bg-accentBlue-500/20 border border-accentBlue-500/40 px-2 py-1 rounded">Belum dipilih</span>
+                </h3>
+
+                <div id="diamond-grid" class="grid grid-cols-2 sm:grid-cols-4 gap-3 max-h-80 overflow-y-auto pr-1">
+                    <!-- Diamond items populated via JS -->
+                </div>
+            </div>
+
+            <!-- Mengapa Harus Top Up di Vallz Store -->
+            <div class="luxury-card p-5">
+                <h4 class="text-xs font-bold text-accentBlue-400 uppercase tracking-widest mb-3">Kenapa harus top up di vallz store</h4>
+                <ul class="space-y-2 text-xs text-gray-200">
+                    <li class="flex items-center gap-2"><i class="fa-solid fa-check text-accentBlue-400"></i> Proses Instan (1-3 Menit Masuk)</li>
+                    <li class="flex items-center gap-2"><i class="fa-solid fa-check text-accentBlue-400"></i> Aman 100% Legal & Resmi</li>
+                    <li class="flex items-center gap-2"><i class="fa-solid fa-check text-accentBlue-400"></i> Harga Terbaik & Diskon Setiap Hari</li>
+                </ul>
+            </div>
+
+            <!-- Top Up Order Form -->
+            <div class="luxury-card p-6">
+                <h3 class="text-base font-bold font-serif blue-gradient-text mb-4">Formulir Pemesanan Top Up</h3>
+                <form id="form-topup" onsubmit="submitTopup(event)" class="space-y-4">
+                    <div>
+                        <label class="block text-xs font-medium text-gray-300 mb-1">Login Akun Moonton / User ID (wajib)</label>
+                        <input type="text" id="topup-account" required placeholder="Contoh: user_id (zone_id) atau email moonton" class="w-full bg-[#07090e] border border-accentBlue-500/30 rounded-xl px-4 py-2.5 text-sm text-white focus:outline-none focus:border-accentBlue-500 transition">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-medium text-gray-300 mb-1">Password Moonton (Jika via login / kosongkan jika ID saja)</label>
+                        <input type="password" id="topup-pass" placeholder="Password Moonton" class="w-full bg-[#07090e] border border-accentBlue-500/30 rounded-xl px-4 py-2.5 text-sm text-white focus:outline-none focus:border-accentBlue-500 transition">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-medium text-gray-300 mb-1">Telepon / WhatsApp</label>
+                        <input type="tel" id="topup-phone" required placeholder="Contoh: 083899950805" class="w-full bg-[#07090e] border border-accentBlue-500/30 rounded-xl px-4 py-2.5 text-sm text-white focus:outline-none focus:border-accentBlue-500 transition">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-medium text-gray-300 mb-1">Kenapa Anda memilih store kami?</label>
+                        <select id="topup-reason" class="w-full bg-[#07090e] border border-accentBlue-500/30 rounded-xl px-4 py-2.5 text-sm text-white focus:outline-none focus:border-accentBlue-500 transition">
+                            <option value="">Pilih satu opsi</option>
+                            <option value="Harga Termurah">Harga Termurah</option>
+                            <option value="Proses Sangat Cepat">Proses Sangat Cepat</option>
+                            <option value="Terpercaya & Aman">Terpercaya & Aman</option>
+                            <option value="Rekomendasi Teman">Rekomendasi Teman</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="block text-xs font-medium text-gray-300 mb-1">Saran dan Kritik</label>
+                        <textarea id="topup-feedback" rows="3" placeholder="Tuliskan saran atau kritik Anda untuk kemajuan store kami..." class="w-full bg-[#07090e] border border-accentBlue-500/30 rounded-xl px-4 py-2.5 text-sm text-white focus:outline-none focus:border-accentBlue-500 transition"></textarea>
+                    </div>
+                    <button type="submit" class="w-full py-3 rounded-xl blue-gradient-bg text-black font-bold text-sm hover:opacity-95 transition shadow-lg shadow-accentBlue-500/20 flex items-center justify-center gap-2">
+                        <i class="fa-solid fa-paper-plane"></i> Kirim Pesanan via WhatsApp
+                    </button>
+                </form>
+            </div>
+
+            <!-- Social Links / Badges -->
+            <div class="flex justify-center gap-4 pt-2">
+                <a href="https://wa.me/6282122905448" target="_blank" class="w-12 h-12 rounded-full bg-emerald-600/20 border border-emerald-500 text-emerald-400 flex items-center justify-center hover:bg-emerald-600 hover:text-white transition text-xl shadow-md">
+                    <i class="fa-brands fa-whatsapp"></i>
+                </a>
+                <a href="https://www.instagram.com/vallzz_store165" target="_blank" class="w-12 h-12 rounded-full bg-pink-600/20 border border-pink-500 text-pink-400 flex items-center justify-center hover:bg-pink-600 hover:text-white transition text-xl shadow-md">
+                    <i class="fa-brands fa-instagram"></i>
+                </a>
+            </div>
+        </section>
+
+        <!-- SECTION: JASA JOKI -->
+        <section id="section-joki" class="hidden space-y-6">
+            <div class="flex items-center justify-between">
+                <div class="flex items-center gap-3">
+                    <button onclick="switchTab('home')" class="w-9 h-9 rounded-xl bg-[#111827] border border-accentBlue-500/40 flex items-center justify-center text-accentBlue-400 hover:bg-accentBlue-500 hover:text-black transition">
+                        <i class="fa-solid fa-arrow-left"></i>
+                    </button>
+                    <h2 class="text-2xl font-serif font-bold blue-gradient-text">Jasa Joki Akun</h2>
+                </div>
+                <span class="text-xs px-3 py-1 rounded-full bg-accentBlue-500/20 text-accentBlue-300 border border-accentBlue-500/40 font-semibold">Pro Player</span>
+            </div>
+
+            <!-- Joki Order Form -->
+            <div class="luxury-card p-6">
+                <h3 class="text-base font-bold font-serif blue-gradient-text mb-4">Formulir Order Joki</h3>
+                <form id="form-joki" onsubmit="submitJoki(event)" class="space-y-4">
+                    <div>
+                        <label class="block text-xs font-medium text-gray-300 mb-1">Login Akun Moonton (wajib)</label>
+                        <input type="text" id="joki-account" required placeholder="Email / Username Moonton" class="w-full bg-[#07090e] border border-accentBlue-500/30 rounded-xl px-4 py-2.5 text-sm text-white focus:outline-none focus:border-accentBlue-500 transition">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-medium text-gray-300 mb-1">Password Moonton (wajib)</label>
+                        <input type="password" id="joki-pass" required placeholder="Password Moonton" class="w-full bg-[#07090e] border border-accentBlue-500/30 rounded-xl px-4 py-2.5 text-sm text-white focus:outline-none focus:border-accentBlue-500 transition">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-medium text-gray-300 mb-1">Telepon / WhatsApp</label>
+                        <input type="tel" id="joki-phone" required placeholder="Contoh: 083899950805" class="w-full bg-[#07090e] border border-accentBlue-500/30 rounded-xl px-4 py-2.5 text-sm text-white focus:outline-none focus:border-accentBlue-500 transition">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-medium text-gray-300 mb-1">Pilih Jenis Layanan Joki</label>
+                        <select id="joki-type" onchange="updateJokiPricing()" class="w-full bg-[#07090e] border border-accentBlue-500/30 rounded-xl px-4 py-2.5 text-sm text-white focus:outline-none focus:border-accentBlue-500 transition font-semibold text-accentBlue-400">
+                            <option value="reguler">Reguler Standar</option>
+                            <option value="express">Express (Mau order express min 2 hari jadi) ⚡</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="block text-xs font-medium text-gray-300 mb-1">Pilih Target Rank (Opsional / Referensi)</label>
+                        <select id="joki-target-rank" onchange="syncRankSelectionFromDropdown()" class="w-full bg-[#07090e] border border-accentBlue-500/30 rounded-xl px-4 py-2.5 text-sm text-white focus:outline-none focus:border-accentBlue-500 transition">
+                            <option value="">Pilih rank tujuan (atau klik card di bawah)</option>
+                            <option value="Master">Master</option>
+                            <option value="Grand Master">Grand Master</option>
+                            <option value="Epic">Epic</option>
+                            <option value="Legends">Legends</option>
+                            <option value="Mythic Grading">Mythic Grading</option>
+                            <option value="Mythic Honor">Mythic Honor</option>
+                            <option value="Mythic Glory">Mythic Glory</option>
+                            <option value="Mythic Immortal">Mythic Immortal</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="block text-xs font-medium text-gray-300 mb-1">Kenapa Anda memilih store kami?</label>
+                        <select id="joki-reason" class="w-full bg-[#07090e] border border-accentBlue-500/30 rounded-xl px-4 py-2.5 text-sm text-white focus:outline-none focus:border-accentBlue-500 transition">
+                            <option value="">Pilih satu opsi</option>
+                            <option value="Aman & Terpercaya">Aman & Terpercaya</option>
+                            <option value="Pro Player Berpengalaman">Pro Player Berpengalaman</option>
+                            <option value="Proses Cepat & Garansi">Proses Cepat & Garansi</option>
+                            <option value="Rekomendasi Teman">Rekomendasi Teman</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="block text-xs font-medium text-gray-300 mb-1">Saran dan Kritik / Catatan Joki</label>
+                        <textarea id="joki-feedback" rows="3" placeholder="Tuliskan catatan khusus (request hero, dll) atau saran..." class="w-full bg-[#07090e] border border-accentBlue-500/30 rounded-xl px-4 py-2.5 text-sm text-white focus:outline-none focus:border-accentBlue-500 transition"></textarea>
+                    </div>
+                    <button type="submit" class="w-full py-3 rounded-xl blue-gradient-bg text-black font-bold text-sm hover:opacity-95 transition shadow-lg shadow-accentBlue-500/20 flex items-center justify-center gap-2">
+                        <i class="fa-solid fa-paper-plane"></i> Kirim Order Joki via WhatsApp
+                    </button>
+                </form>
+            </div>
+
+            <!-- Joki Rank Catalog Price List -->
+            <div class="luxury-card p-6 relative overflow-hidden">
+                <div class="absolute inset-0 bg-cover bg-center opacity-10 pointer-events-none" style="background-image: radial-gradient(#0EA5E9 1px, transparent 1px); background-size: 20px 20px;"></div>
+                <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between mb-4 relative z-10 gap-2">
+                    <div>
+                        <h3 class="text-base font-serif font-bold blue-gradient-text">Katalog Harga Jasa Joki</h3>
+                        <p id="catalog-subtitle" class="text-[11px] text-accentBlue-300/70">Mode: Reguler Standar (Klik card untuk pilih rank tujuan & isi form otomatis)</p>
+                    </div>
+                    <div class="flex gap-2">
+                        <button type="button" onclick="setJokiMode('reguler')" id="btn-mode-reguler" class="px-3 py-1 rounded blue-gradient-bg text-black font-bold text-[10px] transition shadow-sm">REGULER</button>
+                        <button type="button" onclick="setJokiMode('express')" id="btn-mode-express" class="px-3 py-1 rounded bg-[#1f293d] text-accentBlue-400 border border-accentBlue-500/50 font-bold text-[10px] transition shadow-sm">EXPRESS (MIN 2 HARI)</button>
+                    </div>
+                </div>
+
+                <div id="joki-rank-grid" class="grid grid-cols-2 gap-3 relative z-10">
+                    <!-- Populated via JS with star symbols -->
+                </div>
+            </div>
+
+            <!-- Admin Joki Direct WhatsApp Button -->
+            <div class="text-center">
+                <a href="https://wa.me/6282122905448" target="_blank" class="inline-flex items-center gap-2 px-6 py-3 rounded-xl blue-gradient-bg text-black font-bold text-sm shadow-lg shadow-accentBlue-500/20 hover:opacity-95 transition">
+                    <i class="fa-brands fa-whatsapp text-lg"></i> Hubungi Admin Joki Kami
+                </a>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Floating Customer Service / Live Chat Widget -->
+    <div class="fixed bottom-6 right-6 z-50 flex flex-col items-end">
+        <!-- Chat Popup Box -->
+        <div id="cs-popup" class="hidden mb-3 w-72 bg-[#111827] border border-accentBlue-500/40 rounded-2xl shadow-2xl p-4 text-left">
+            <div class="flex items-center justify-between pb-3 border-b border-accentBlue-500/20 mb-3">
+                <div class="flex items-center gap-2">
+                    <div class="w-8 h-8 rounded-full blue-gradient-bg flex items-center justify-center text-black font-bold text-xs">
+                        <i class="fa-solid fa-headset"></i>
+                    </div>
+                    <div>
+                        <div class="font-bold text-white text-xs">Customer Service Vallz</div>
+                        <div class="text-[10px] text-emerald-400 flex items-center gap-1"><span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span> Online 24 Jam</div>
+                    </div>
+                </div>
+                <button onclick="toggleCsPopup()" class="text-gray-400 hover:text-white text-xs"><i class="fa-solid fa-xmark"></i></button>
+            </div>
+            <div class="space-y-2 mb-3">
+                <div class="bg-[#07090e] p-2.5 rounded-xl border border-accentBlue-500/20 text-xs text-gray-200">
+                    Halo! Ada yang bisa kami bantu seputar Top Up Diamond atau Jasa Joki Rank Mobile Legends? 🎮✨
+                </div>
+            </div>
+            <a href="https://wa.me/6282122905448?text=Halo%20Admin%20Vallz%20Store,%20saya%20ingin%20bertanya%20mengenai%20layanan%20store." target="_blank" class="block text-center py-2 rounded-xl blue-gradient-bg text-black font-bold text-xs shadow-md hover:opacity-95 transition">
+                <i class="fa-brands fa-whatsapp mr-1"></i> Chat CS via WhatsApp
+            </a>
+        </div>
+        
+        <!-- Floating Button -->
+        <button onclick="toggleCsPopup()" class="w-14 h-14 rounded-full blue-gradient-bg text-black shadow-2xl shadow-accentBlue-500/50 flex items-center justify-center text-2xl hover:scale-110 transition group relative">
+            <i class="fa-solid fa-headset group-hover:rotate-12 transition"></i>
+            <span class="absolute -top-1 -right-1 w-4 h-4 bg-emerald-500 border-2 border-[#07090e] rounded-full"></span>
+        </button>
+    </div>
+
+    <!-- Footer Section -->
+    <footer class="mt-12 bg-[#05070a] border-t border-accentBlue-500/30 text-gray-300 text-xs py-8 px-4">
+        <div class="max-w-4xl mx-auto space-y-6 text-center">
+            
+            <!-- Lokasi, Jam, Kontak Boxes -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 text-center pb-6 border-b border-accentBlue-500/20">
+                <div class="space-y-1">
+                    <h4 class="font-bold text-accentBlue-400 font-serif text-sm">Lokasi</h4>
+                    <p>Jalan Bonang 23510</p>
+                    <p>Grubug SR 2 NO 22</p>
+                </div>
+                <div class="space-y-1">
+                    <h4 class="font-bold text-accentBlue-400 font-serif text-sm">Jam Operasional</h4>
+                    <p class="text-accentBlue-300 font-semibold">24 Jam Nonstop</p>
+                    <p>Senin s.d. Minggu</p>
+                </div>
+                <div class="space-y-1">
+                    <h4 class="font-bold text-accentBlue-400 font-serif text-sm">Kontak & Email</h4>
+                    <p><a href="mailto:adisnoval126@gmail.com" class="hover:text-accentBlue-400 underline transition">adisnoval126@gmail.com</a></p>
+                    <p>+62 838-9995-0805</p>
+                </div>
+            </div>
+
+            <!-- Copyright -->
+            <div class="text-accentBlue-300/60 text-[11px] tracking-wider uppercase">
+                By Vallz — All Rights Reserved &copy; 2026
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript Application Logic -->
+    <script>
+        // Diamond catalog data (Mobile Legends)
+        const diamondItems = [
+            { id: 1, count: "5", bonus: "+0", price: "Rp 1.500" },
+            { id: 2, count: "10", bonus: "+1", price: "Rp 2.900" },
+            { id: 3, count: "19", bonus: "+2", price: "Rp 5.500" },
+            { id: 4, count: "28", bonus: "+3", price: "Rp 7.900" },
+            { id: 5, count: "36", bonus: "+4", price: "Rp 9.900" },
+            { id: 6, count: "44", bonus: "+5", price: "Rp 12.500" },
+            { id: 7, count: "59", bonus: "+6", price: "Rp 16.500" },
+            { id: 8, count: "85", bonus: "+9", price: "Rp 23.500" },
+            { id: 9, count: "110", bonus: "+11", price: "Rp 29.900" },
+            { id: 10, count: "144", bonus: "+15", price: "Rp 38.900" },
+            { id: 11, count: "170", bonus: "+18", price: "Rp 45.900" },
+            { id: 12, count: "222", bonus: "+23", price: "Rp 59.900" },
+            { id: 13, count: "284", bonus: "+30", price: "Rp 76.900" },
+            { id: 14, count: "355", bonus: "+38", price: "Rp 95.900" },
+            { id: 15, count: "429", bonus: "+45", price: "Rp 115.000" },
+            { id: 16, count: "514", bonus: "+55", price: "Rp 138.000" },
+            { id: 17, count: "565", bonus: "+60", price: "Rp 152.000" },
+            { id: 18, count: "716", bonus: "+75", price: "Rp 189.000" },
+            { id: 19, count: "878", bonus: "+92", price: "Rp 232.000" },
+            { id: 20, count: "963", bonus: "+101", price: "Rp 254.000" },
+            { id: 21, count: "1050", bonus: "+110", price: "Rp 278.000" },
+            { id: 22, count: "1220", bonus: "+130", price: "Rp 322.000" }
+        ];
+
+        // Jasa Joki rank data with stars ⭐
+        const jokiRanks = [
+            { rank: "Master", reguler: "Rp 6.000", express: "Rp 12.000", stars: "⭐⭐⭐" },
+            { rank: "Grand Master", reguler: "Rp 6.000", express: "Rp 12.000", stars: "⭐⭐⭐⭐" },
+            { rank: "Epic", reguler: "Rp 7.000", express: "Rp 15.000", stars: "⭐⭐⭐⭐⭐" },
+            { rank: "Legends", reguler: "Rp 8.000", express: "Rp 18.000", stars: "⭐⭐⭐⭐⭐" },
+            { rank: "Mythic Grading", reguler: "Rp 230.000", express: "Rp 350.000", stars: "⭐ Placement" },
+            { rank: "Mythic Honor", reguler: "Rp 18.000", express: "Rp 35.000", stars: "🌟 25 Stars" },
+            { rank: "Mythic Glory", reguler: "Rp 22.000", express: "Rp 42.000", stars: "🌟 50 Stars" },
+            { rank: "Mythic Immortal", reguler: "Rp 28.000", express: "Rp 55.000", stars: "👑 Top Global" }
+        ];
+
+        let selectedDiamond = null;
+        let currentJokiMode = 'reguler';
+        let selectedRankCard = null;
+
+        // Initialize UI components on load
+        window.addEventListener('DOMContentLoaded', () => {
+            renderDiamonds();
+            renderJokiRanks();
+        });
+
+        function renderDiamonds() {
+            const grid = document.getElementById('diamond-grid');
+            grid.innerHTML = diamondItems.map(item => `
+                <div onclick="selectDiamond(${item.id})" id="diamond-card-${item.id}" class="diamond-item bg-[#07090e] border border-accentBlue-500/30 rounded-xl p-3 text-center cursor-pointer hover:border-accentBlue-500 transition relative shadow-sm">
+                    <div class="text-accentBlue-400 text-lg mb-1"><i class="fa-solid fa-gem"></i></div>
+                    <div class="font-bold text-white text-sm">${item.count} Diamonds</div>
+                    <div class="text-[10px] text-accentBlue-300 mb-1">Bonus ${item.bonus}</div>
+                    <div class="text-xs font-semibold text-accentBlue-400">${item.price}</div>
+                </div>
+            `).join('');
+        }
+
+        function selectDiamond(id) {
+            document.querySelectorAll('.diamond-item').forEach(el => {
+                el.classList.remove('border-accentBlue-500', 'bg-accentBlue-500/20', 'shadow-md', 'shadow-accentBlue-500/20');
+                el.classList.add('border-accentBlue-500/30', 'bg-[#07090e]');
+            });
+            const selectedCard = document.getElementById(`diamond-card-${id}`);
+            if (selectedCard) {
+                selectedCard.classList.remove('border-accentBlue-500/30', 'bg-[#07090e]');
+                selectedCard.classList.add('border-accentBlue-500', 'bg-accentBlue-500/20', 'shadow-md', 'shadow-accentBlue-500/20');
+            }
+            selectedDiamond = diamondItems.find(i => i.id === id);
+            document.getElementById('selected-diamond-info').innerText = `${selectedDiamond.count} Diamonds (${selectedDiamond.price})`;
+        }
+
+        function renderJokiRanks() {
+            const grid = document.getElementById('joki-rank-grid');
+            grid.innerHTML = jokiRanks.map((j, index) => {
+                const price = currentJokiMode === 'express' ? j.express : j.reguler;
+                const isSelected = selectedRankCard === j.rank;
+                const borderClass = isSelected ? 'border-accentBlue-500 bg-accentBlue-500/25 shadow-md shadow-accentBlue-500/20' : 'border-accentBlue-500/30 bg-[#07090e]';
+                
+                return `
+                    <div onclick="selectRankCard('${j.rank}')" id="rank-card-${index}" class="rank-card ${borderClass} rounded-xl p-3 text-center cursor-pointer hover:border-accentBlue-500 transition shadow-sm">
+                        <div class="text-xs font-serif font-bold text-white mb-0.5">${j.rank}</div>
+                        <div class="text-[10px] text-amber-400 mb-1">${j.stars}</div>
+                        <div class="text-sm font-bold text-accentBlue-400">${price}</div>
+                        ${currentJokiMode === 'express' ? '<div class="text-[9px] text-accentBlue-300 mt-0.5">⚡ Kilat Min 2 Hari</div>' : '<div class="text-[9px] text-gray-400 mt-0.5">Reguler Standar</div>'}
+                    </div>
+                `;
+            }).join('');
+        }
+
+        function selectRankCard(rankName) {
+            selectedRankCard = rankName;
+            document.getElementById('joki-target-rank').value = rankName;
+            highlightRankCards();
+            document.getElementById('form-joki').scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }
+
+        function syncRankSelectionFromDropdown() {
+            selectedRankCard = document.getElementById('joki-target-rank').value;
+            highlightRankCards();
+        }
+
+        function highlightRankCards() {
+            jokiRanks.forEach((j, index) => {
+                const card = document.getElementById(`rank-card-${index}`);
+                if (card) {
+                    if (j.rank === selectedRankCard) {
+                        card.className = "rank-card border-accentBlue-500 bg-accentBlue-500/25 rounded-xl p-3 text-center cursor-pointer hover:border-accentBlue-500 transition shadow-md shadow-accentBlue-500/20";
+                    } else {
+                        card.className = "rank-card border-accentBlue-500/30 bg-[#07090e] rounded-xl p-3 text-center cursor-pointer hover:border-accentBlue-500 transition shadow-sm";
+                    }
+                }
+            });
+        }
+
+        function setJokiMode(mode) {
+            currentJokiMode = mode;
+            const selectEl = document.getElementById('joki-type');
+            if(selectEl) selectEl.value = mode;
+
+            const btnReg = document.getElementById('btn-mode-reguler');
+            const btnExp = document.getElementById('btn-mode-express');
+            const subtitle = document.getElementById('catalog-subtitle');
+
+            if (mode === 'express') {
+                btnExp.className = "px-3 py-1 rounded blue-gradient-bg text-black font-bold text-[10px] transition shadow-sm";
+                btnReg.className = "px-3 py-1 rounded bg-[#1f293d] text-accentBlue-400 border border-accentBlue-500/50 font-bold text-[10px] transition shadow-sm";
+                subtitle.innerText = "Mode: Express Kilat (Minimal 2 Hari Jadi) — Klik card untuk pilih rank";
+            } else {
+                btnReg.className = "px-3 py-1 rounded blue-gradient-bg text-black font-bold text-[10px] transition shadow-sm";
+                btnExp.className = "px-3 py-1 rounded bg-[#1f293d] text-accentBlue-400 border border-accentBlue-500/50 font-bold text-[10px] transition shadow-sm";
+                subtitle.innerText = "Mode: Reguler Standar — Klik card untuk pilih rank";
+            }
+            renderJokiRanks();
+        }
+
+        function updateJokiPricing() {
+            const selectEl = document.getElementById('joki-type');
+            setJokiMode(selectEl.value);
+        }
+
+        // Tab Switching logic
+        function switchTab(tabName) {
+            ['home', 'topup', 'joki'].forEach(t => {
+                const el = document.getElementById(`section-${t}`);
+                if (el) el.classList.add('hidden');
+            });
+
+            const targetEl = document.getElementById(`section-${tabName}`);
+            if (targetEl) targetEl.classList.remove('hidden');
+
+            // Update nav active states
+            document.querySelectorAll('.nav-btn').forEach(btn => {
+                if(btn.dataset.target === tabName) {
+                    btn.classList.add('text-accentBlue-500', 'border-accentBlue-500');
+                    btn.classList.remove('text-gray-300', 'border-transparent');
+                } else {
+                    btn.classList.remove('text-accentBlue-500', 'border-accentBlue-500');
+                    btn.classList.add('text-gray-300', 'border-transparent');
+                }
+            });
+
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        function toggleMobileMenu() {
+            const menu = document.getElementById('mobile-menu');
+            menu.classList.toggle('hidden');
+        }
+
+        function toggleCsPopup() {
+            const popup = document.getElementById('cs-popup');
+            popup.classList.toggle('hidden');
+        }
+
+        // Like / Dislike Toggle Handler State
+        let userVote = null; // null, 'like', 'dislike'
+        let baseLikes = 142;
+        let baseDislikes = 2;
+
+        function handleFeedback(type) {
+            const btnLike = document.getElementById('btn-like');
+            const btnDislike = document.getElementById('btn-dislike');
+            const iconLike = document.getElementById('icon-like');
+            const iconDislike = document.getElementById('icon-dislike');
+            const likeCountEl = document.getElementById('like-count');
+            const dislikeCountEl = document.getElementById('dislike-count');
+
+            if (userVote === type) {
+                // Undo vote if clicking the same button again
+                if (type === 'like') {
+                    baseLikes--;
+                    btnLike.classList.remove('bg-accentBlue-500/20', 'border-accentBlue-500', 'text-accentBlue-300');
+                    iconLike.className = 'fa-regular fa-thumbs-up text-accentBlue-400';
+                } else {
+                    baseDislikes--;
+                    btnDislike.classList.remove('bg-red-500/20', 'border-red-500', 'text-red-300');
+                    iconDislike.className = 'fa-regular fa-thumbs-down text-red-400';
+                }
+                userVote = null;
+            } else {
+                // If switching or voting fresh
+                if (userVote === 'like') {
+                    baseLikes--;
+                    btnLike.classList.remove('bg-accentBlue-500/20', 'border-accentBlue-500', 'text-accentBlue-300');
+                    iconLike.className = 'fa-regular fa-thumbs-up text-accentBlue-400';
+                } else if (userVote === 'dislike') {
+                    baseDislikes--;
+                    btnDislike.classList.remove('bg-red-500/20', 'border-red-500', 'text-red-300');
+                    iconDislike.className = 'fa-regular fa-thumbs-down text-red-400';
+                }
+
+                if (type === 'like') {
+                    baseLikes++;
+                    btnLike.classList.add('bg-accentBlue-500/20', 'border-accentBlue-500', 'text-accentBlue-300');
+                    iconLike.className = 'fa-solid fa-thumbs-up text-accentBlue-400';
+                } else {
+                    baseDislikes++;
+                    btnDislike.classList.add('bg-red-500/20', 'border-red-500', 'text-red-300');
+                    iconDislike.className = 'fa-solid fa-thumbs-down text-red-400';
+                }
+                userVote = type;
+            }
+
+            likeCountEl.innerText = baseLikes;
+            dislikeCountEl.innerText = baseDislikes;
+        }
+
+        // Topup order submission to WhatsApp
+        function submitTopup(e) {
+            e.preventDefault();
+            const account = document.getElementById('topup-account').value;
+            const pass = document.getElementById('topup-pass').value;
+            const phone = document.getElementById('topup-phone').value;
+            const reason = document.getElementById('topup-reason').value;
+            const feedback = document.getElementById('topup-feedback').value;
+
+            if (!selectedDiamond) {
+                alert('Silakan pilih nominal diamond terlebih dahulu!');
+                return;
+            }
+
+            const message = `Halo Admin Vallz Store, saya ingin melakukan pemesanan Top Up:\n\n` +
+                            `• Layanan: Top Up Diamond MLBB\n` +
+                            `• Nominal: ${selectedDiamond.count} Diamond (${selectedDiamond.price})\n` +
+                            `• Akun/ID: ${account}\n` +
+                            `• Pass Moonton: ${pass || '-'}\n` +
+                            `• No Telepon: ${phone}\n` +
+                            `• Alasan Memilih: ${reason || '-'}\n` +
+                            `• Kritik & Saran: ${feedback || '-'}`;
+
+            const encoded = encodeURIComponent(message);
+            window.open(`https://wa.me/6282122905448?text=${encoded}`, '_blank');
+        }
+
+        // Joki order submission to WhatsApp
+        function submitJoki(e) {
+            e.preventDefault();
+            const account = document.getElementById('joki-account').value;
+            const pass = document.getElementById('joki-pass').value;
+            const phone = document.getElementById('joki-phone').value;
+            const jokiType = document.getElementById('joki-type').value;
+            const targetRank = document.getElementById('joki-target-rank').value;
+            const reason = document.getElementById('joki-reason').value;
+            const feedback = document.getElementById('joki-feedback').value;
+
+            let priceText = '-';
+            if (targetRank) {
+                const foundRank = jokiRanks.find(r => r.rank === targetRank);
+                if (foundRank) {
+                    priceText = jokiType === 'express' ? foundRank.express : foundRank.reguler;
+                }
+            }
+
+            const modeTitle = jokiType === 'express' ? 'Order Express (Min 2 Hari) ⚡' : 'Reguler Standar';
+
+            const message = `Halo Admin Joki Vallz Store, saya ingin order Jasa Joki:\n\n` +
+                            `• Layanan: Jasa Joki Rank\n` +
+                            `• Tipe Order: ${modeTitle}\n` +
+                            `• Target Rank: ${targetRank || '-'} (${priceText})\n` +
+                            `• Email/User Moonton: ${account}\n` +
+                            `• Password Moonton: ${pass}\n` +
+                            `• No Telepon: ${phone}\n` +
+                            `• Alasan Memilih: ${reason || '-'}\n` +
+                            `• Catatan Joki: ${feedback || '-'}`;
+
+            const encoded = encodeURIComponent(message);
+            window.open(`https://wa.me/6282122905448?text=${encoded}`, '_blank');
+        }
+    </script>
+</body>
+</html>
